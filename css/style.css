@@ -180,7 +180,7 @@ ul { list-style: none; }
 }
 .story { min-height: 500px; padding: 89px 0 60px; }
 .interests { min-height: 516px; padding: 108px 0 42px; }
-.story__bg, .interests__bg, .contact__bg {
+.story__bg, .interests__bg {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -244,17 +244,20 @@ ul { list-style: none; }
 
 /* ===== CONTATTI ===== */
 .contact {
-  position: relative;
-  min-height: 807px;
+  display: grid;
+  grid-template-columns: var(--colonna-dx) 1fr;
+  align-items: center;
+  min-height: 700px;
+  background: var(--bianco);
   overflow: hidden;
 }
-.contact__bg { object-position: center top; }
+.contact__img {
+  width: 88%;                     /* il polso esce dal bordo sinistro */
+  height: auto;
+}
 .contact__text {
-  position: relative;
-  z-index: 1;
-  margin-left: var(--colonna-dx);
   padding: 65px 40px 60px 0;
-  max-width: calc(var(--colonna-dx) + 500px);
+  max-width: 500px;
 }
 .contact h2 {
   max-width: 460px;
@@ -310,7 +313,7 @@ ul { list-style: none; }
   .projects__intro { padding-left: 0; margin-bottom: 70px; }
   .projects__intro p { margin-bottom: 40px; }
 
-  .contact__text { margin-left: 50%; }
+  .contact { grid-template-columns: 50% 1fr; min-height: 560px; }
 
   .footer { padding: 43px 40px 40px; }
   .footer__nav { gap: 48px; }
@@ -378,9 +381,9 @@ ul { list-style: none; }
   .projects__grid { grid-template-columns: 1fr; }
   .card, .card:last-child { min-height: 0; padding-bottom: 48px; }
 
-  .contact { min-height: 0; display: flex; flex-direction: column; }
-  .contact__bg { position: relative; height: 360px; order: 2; object-position: center bottom; }
-  .contact__text { margin: 0; padding: 60px 24px 32px; max-width: none; }
+  .contact { min-height: 0; display: flex; flex-direction: column; align-items: stretch; }
+  .contact__img { order: 2; width: 92%; margin-bottom: 40px; }
+  .contact__text { padding: 60px 24px 32px; max-width: none; }
   .contact h2 { margin-bottom: 32px; }
   .contact__lead { margin-bottom: 32px; }
 
