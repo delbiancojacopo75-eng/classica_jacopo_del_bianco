@@ -1,0 +1,394 @@
+/* ===== Font: Finlandica Text (file locali in /fonts) ===== */
+@font-face {
+  font-family: "Finlandica Text";
+  src: url("../fonts/FinlandicaText-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Finlandica Text";
+  src: url("../fonts/FinlandicaText-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Finlandica Text";
+  src: url("../fonts/FinlandicaText-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ===== Variabili (dal design Figma) ===== */
+:root {
+  --bianco: #ffffff;
+  --nero: #000000;
+  --grigio-scuro: #1e1e1e;
+  --grigio: #333333;
+  --rosso: #dc5342;
+  --rosso-scuro: #b04235;
+  --font-finlandica: "Finlandica Text", sans-serif;
+  --font-inter: "Inter", sans-serif;
+
+  --header-h: 110px;
+  --margine: 10.75%;      /* 155px su 1440 */
+  --colonna-dx: 58.7%;    /* 845px su 1440 */
+  --titolo: 60px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
+
+body {
+  background: var(--bianco);
+  color: var(--nero);
+  font-family: var(--font-finlandica);
+  font-size: 18px;
+  line-height: 22px;
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+/* Link "> sezione" */
+.link-arrow {
+  display: inline-block;
+  font-family: var(--font-finlandica);
+  font-weight: 600;
+  color: var(--rosso-scuro);
+}
+.link-arrow--inter { font-family: var(--font-inter); color: var(--rosso); }
+.link-arrow:hover { text-decoration: underline; }
+
+/* ===== HEADER ===== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  padding: 0 60px;
+  background: var(--grigio-scuro);
+  border-bottom: 1px solid var(--grigio);
+}
+.logo img { width: 129px; height: 53px; }
+
+/* Menu centrato */
+.nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 90px;
+}
+.nav a { color: var(--bianco); transition: color .2s; }
+.nav a:hover { color: var(--rosso); }
+
+/* Hamburger: nascosto su desktop */
+.menu {
+  display: none;
+  margin-left: auto;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.menu__bar,
+.menu__bar::before,
+.menu__bar::after {
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--bianco);
+  transition: transform .25s, background .25s;
+}
+.menu__bar { position: relative; }
+.menu__bar::before,
+.menu__bar::after { content: ""; position: absolute; left: 0; }
+.menu__bar::before { top: -6px; }
+.menu__bar::after  { top: 6px; }
+/* Hamburger -> X quando il menu è aperto */
+.menu[aria-expanded="true"] .menu__bar { background: transparent; }
+.menu[aria-expanded="true"] .menu__bar::before { transform: translateY(6px) rotate(45deg); }
+.menu[aria-expanded="true"] .menu__bar::after  { transform: translateY(-6px) rotate(-45deg); }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  height: 796px;
+  overflow: hidden;
+  background: var(--bianco);
+}
+.hero__text {
+  position: relative;
+  z-index: 1;
+  padding: 272px 0 0 var(--margine);
+}
+.hero h1 {
+  max-width: 522px;
+  font-weight: 700;
+  font-size: var(--titolo);
+  line-height: normal;
+  margin-bottom: 40px;
+}
+.hero__img {
+  position: absolute;
+  right: 0;                       /* il polso esce dal bordo destro */
+  top: 50%;
+  width: min(820px, 57%);         /* altezza max ~795px: sta sempre dentro la hero */
+  max-width: none;
+  height: auto;                   /* proporzioni originali: l'immagine non viene mai tagliata */
+  transform: translateY(-50%) scaleX(-1);  /* centrata e specchiata come in Figma */
+}
+
+/* ===== CHI SONO ===== */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 49.3%;   /* foto 710px su 1440 */
+  min-height: 500px;
+  background: var(--grigio);
+}
+.about__text {
+  padding: 181px 40px 60px var(--margine);
+  color: var(--bianco);
+  font-family: var(--font-inter);
+}
+.about__text p { max-width: 440px; margin-bottom: 66px; }
+.about__img {
+  width: 100%;
+  height: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  object-position: left top;
+}
+
+/* ===== PERCORSO e INTERESSI (testo su immagine) ===== */
+.story, .interests {
+  position: relative;
+  overflow: hidden;
+  color: var(--bianco);
+  display: grid;
+  grid-template-columns: var(--colonna-dx) 1fr;
+}
+.story { min-height: 500px; padding: 89px 0 60px; }
+.interests { min-height: 516px; padding: 108px 0 42px; }
+.story__bg, .interests__bg, .contact__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.story__bg { opacity: .92; }
+.interests::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .53);
+}
+.story p, .interests p {
+  position: relative;
+  z-index: 2;
+  max-width: 440px;
+}
+.story__left, .interests__left { padding-left: 10.5%; margin-right: 20px; }
+.story__right, .interests__right { margin-top: 190px; margin-right: 40px; }
+.interests p { font-weight: 400; }
+.interests strong { font-weight: 700; }
+
+/* ===== PROGETTI ===== */
+.projects {
+  background: var(--grigio-scuro);
+  color: var(--bianco);
+  padding: 122px 40px 0;
+}
+.projects__intro { padding-left: calc(var(--margine) - 40px); margin-bottom: 123px; }
+.projects h2 {
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: var(--titolo);
+  line-height: normal;
+  margin-bottom: 4px;
+}
+.projects__intro p { max-width: 782px; margin-bottom: 75px; }
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 20px;
+}
+.card { min-height: 488px; padding-bottom: 40px; }
+.card:last-child { min-height: 457px; }
+.card img {
+  width: 100%;
+  aspect-ratio: 670 / 307;
+  object-fit: cover;
+  background: rgba(0, 0, 0, .1);
+}
+.card h3 {
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  margin-top: 13px;
+}
+.card p { max-width: 555px; }
+
+/* ===== CONTATTI ===== */
+.contact {
+  position: relative;
+  min-height: 807px;
+  overflow: hidden;
+}
+.contact__bg { object-position: center top; }
+.contact__text {
+  position: relative;
+  z-index: 1;
+  margin-left: var(--colonna-dx);
+  padding: 65px 40px 60px 0;
+  max-width: calc(var(--colonna-dx) + 500px);
+}
+.contact h2 {
+  max-width: 460px;
+  font-weight: 700;
+  font-size: var(--titolo);
+  line-height: 1.014;
+  margin-bottom: 73px;
+}
+.contact__lead { max-width: 460px; margin-bottom: 48px; }
+.contact__list li { font-weight: 700; margin-bottom: 22px; }
+.contact__list a:hover { color: var(--rosso); }
+
+/* ===== FOOTER ===== */
+.footer {
+  display: flex;
+  align-items: flex-start;
+  min-height: 217px;
+  padding: 43px 11.6% 40px;   /* 167px su 1440 */
+  background: var(--nero);
+  color: var(--bianco);
+}
+.footer__info li { margin-bottom: 11px; }
+.footer__info a:hover { text-decoration: underline; }
+.footer__nav {
+  display: flex;
+  margin-left: auto;
+  gap: 103px;
+}
+.footer__nav a { color: var(--rosso); transition: color .2s; }
+.footer__nav a:hover { color: var(--bianco); }
+
+/* ================================================= */
+/* ===== TABLET (fino a 1024px) ===== */
+/* ================================================= */
+@media (max-width: 1024px) {
+  :root { --titolo: 48px; --margine: 40px; }
+
+  .header { padding: 0 40px; }
+  .nav { gap: 48px; }
+
+  .hero { height: 640px; }
+  .hero__text { padding-top: 200px; }
+  .hero h1 { max-width: 420px; }
+  .hero__img { width: min(600px, 52%); }
+
+  .about__text { padding-top: 100px; }
+
+  .story, .interests { grid-template-columns: 1fr 1fr; }
+  .story__left, .interests__left { padding-left: 40px; }
+  .story__right, .interests__right { margin-top: 120px; }
+
+  .projects { padding-top: 90px; }
+  .projects__intro { padding-left: 0; margin-bottom: 70px; }
+  .projects__intro p { margin-bottom: 40px; }
+
+  .contact__text { margin-left: 50%; }
+
+  .footer { padding: 43px 40px 40px; }
+  .footer__nav { gap: 48px; }
+}
+
+/* ================================================= */
+/* ===== MOBILE (fino a 768px) ===== */
+/* ================================================= */
+@media (max-width: 768px) {
+  :root { --header-h: 80px; --titolo: 40px; --margine: 24px; }
+
+  .header { padding: 0 24px; }
+  .logo img { width: 98px; height: auto; }
+
+  /* Hamburger visibile, menu a tendina */
+  .menu { display: flex; }
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    transform: none;
+    flex-direction: column;
+    gap: 0;
+    background: var(--grigio-scuro);
+    border-bottom: 1px solid var(--grigio);
+    text-align: center;
+    /* chiuso */
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: max-height .3s ease, visibility .3s;
+  }
+  .nav a { padding: 18px 24px; font-size: 20px; }
+  .nav a + a { border-top: 1px solid var(--grigio); }
+  .nav.is-open { max-height: 240px; visibility: visible; }
+
+  .hero { height: auto; display: flex; flex-direction: column; }
+  .hero__text { padding: 60px 24px 32px; }
+  .hero__img {
+    position: relative;
+    left: auto; right: auto; top: auto;
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    align-self: flex-end;
+    transform: scaleX(-1);
+  }
+
+  .about { grid-template-columns: 1fr; }
+  .about__text { padding: 60px 24px; }
+  .about__text p { margin-bottom: 32px; }
+  .about__img { max-height: 420px; }
+
+  .story, .interests {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    padding: 60px 24px;
+    row-gap: 32px;
+  }
+  .story__left, .interests__left { padding-left: 0; margin-right: 0; }
+  .story__right, .interests__right { margin: 0; }
+
+  .projects { padding: 60px 24px 20px; }
+  .projects__grid { grid-template-columns: 1fr; }
+  .card, .card:last-child { min-height: 0; padding-bottom: 48px; }
+
+  .contact { min-height: 0; display: flex; flex-direction: column; }
+  .contact__bg { position: relative; height: 360px; order: 2; object-position: center bottom; }
+  .contact__text { margin: 0; padding: 60px 24px 32px; max-width: none; }
+  .contact h2 { margin-bottom: 32px; }
+  .contact__lead { margin-bottom: 32px; }
+
+  .footer { flex-direction: column; padding: 40px 24px; gap: 24px; }
+  .footer__nav { margin-left: 0; gap: 32px; }
+}
+
+@media (max-width: 400px) {
+  :root { --titolo: 34px; }
+  .footer__nav { gap: 24px; }
+}
